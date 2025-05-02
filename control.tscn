@@ -1,0 +1,609 @@
+[gd_scene load_steps=17 format=3 uid="uid://c3xsqoo45d87b"]
+
+[ext_resource type="Texture2D" uid="uid://dnyt8hbllenut" path="res://Images/saihex.svg" id="1_ee4bf"]
+[ext_resource type="Texture2D" uid="uid://b5njvofj20wse" path="res://Images/yourenotsafe.png" id="1_g31lc"]
+[ext_resource type="Script" uid="uid://j6q1xy5251bm" path="res://GDScripts/ButtonOpenWeb.gd" id="1_kbped"]
+[ext_resource type="Script" uid="uid://rftianf0j2ny" path="res://GDScripts/ReleaseLister.gd" id="2_62e2m"]
+[ext_resource type="Script" uid="uid://7ia3cp5buhx6" path="res://GDScripts/yourenotsafe.gd" id="2_knq72"]
+[ext_resource type="Texture2D" uid="uid://1a2f2fyylqeo" path="res://Images/GVM.svg" id="3_pxugv"]
+[ext_resource type="Script" uid="uid://bdlpuiwnruiol" path="res://GDScripts/LauncherList.gd" id="4_0ytqx"]
+[ext_resource type="Shader" uid="uid://bf3u220l06y4d" path="res://Shaders/UIs/loadingspinner.gdshader" id="5_pxugv"]
+[ext_resource type="Texture2D" uid="uid://fqy0o3wxpv7x" path="res://Images/cross.svg" id="6_6a6wx"]
+[ext_resource type="Texture2D" uid="uid://1diy75u7ysjs" path="res://Images/checkmark.svg" id="6_fj5cn"]
+[ext_resource type="Script" uid="uid://drtryhst0o2y7" path="res://CSharpScripts/InstallationLocation.cs" id="7_iy58a"]
+[ext_resource type="Script" uid="uid://d4fqxu8xsqtgg" path="res://GDScripts/PathUpdater.gd" id="8_6a6wx"]
+[ext_resource type="Script" uid="uid://7qf1iof7b8k1" path="res://GDScripts/force_refresh.gd" id="10_pxugv"]
+[ext_resource type="Script" uid="uid://byda1hvlnlcip" path="res://GDScripts/NotificationUI.gd" id="12_am1vj"]
+[ext_resource type="Texture2D" uid="uid://0gwxkd3xbrsy" path="res://Images/warning.svg" id="12_eh0v1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eh0v1"]
+shader = ExtResource("5_pxugv")
+shader_parameter/radial_center = Vector2(0.5, 0.5)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(1, 1)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Yourenotsafe" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -198.0
+offset_top = -240.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_g31lc")
+expand_mode = 1
+stretch_mode = 6
+script = ExtResource("2_knq72")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.949299
+anchor_top = 0.908963
+anchor_right = 0.994
+anchor_bottom = 0.988
+offset_left = 0.407959
+offset_top = -0.00799561
+offset_right = -0.0880127
+offset_bottom = -0.223999
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_kbped")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button/MarginContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("1_ee4bf")
+expand_mode = 4
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="VFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00607639
+anchor_top = 0.0154321
+anchor_right = 0.391
+anchor_bottom = 0.096
+offset_right = 0.567963
+offset_bottom = -0.208
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Title/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("3_pxugv")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Title/HBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(400.105, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Godot Version Manager[/b]"
+fit_content = true
+scroll_active = false
+tab_size = 13
+shortcut_keys_enabled = false
+vertical_alignment = 2
+text_direction = 1
+
+[node name="ColorRect" type="ColorRect" parent="Title"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ControlPane" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.127
+anchor_right = 0.851
+anchor_bottom = 0.957
+offset_left = -0.0159988
+offset_top = -0.296005
+offset_right = -0.35199
+offset_bottom = -0.135986
+
+[node name="InstalledVersions" type="Panel" parent="ControlPane"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("4_0ytqx")
+metadata/_edit_use_anchors_ = true
+
+[node name="List" type="ScrollContainer" parent="ControlPane/InstalledVersions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0155039
+anchor_top = 0.0910853
+anchor_right = 0.988372
+anchor_bottom = 0.99031
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="uwu" type="VBoxContainer" parent="ControlPane/InstalledVersions/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonTemplate" type="PanelContainer" parent="ControlPane/InstalledVersions/List/uwu"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+action_mode = 0
+alignment = 0
+text_overrun_behavior = 3
+autowrap_mode = 3
+clip_text = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="text" type="RichTextLabel" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[b]VERSION HERE LMFAO[/b]"
+fit_content = true
+
+[node name="LoadingThrobber" type="AspectRatioContainer" parent="ControlPane/InstalledVersions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.377
+anchor_top = 0.423
+anchor_right = 0.623
+anchor_bottom = 0.577
+offset_left = 0.125008
+offset_top = -0.143997
+offset_right = -0.125015
+offset_bottom = 0.144012
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="ControlPane/InstalledVersions/LoadingThrobber"]
+material = SubResource("ShaderMaterial_eh0v1")
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlPane/InstalledVersions"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.011
+anchor_right = 0.985
+anchor_bottom = 0.0796202
+offset_left = 0.124999
+offset_top = -0.676
+offset_right = 0.874908
+offset_bottom = -0.0839958
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 21
+theme_override_font_sizes/bold_font_size = 69
+bbcode_enabled = true
+text = "Installed Versions"
+fit_content = true
+scroll_active = false
+tab_size = 13
+shortcut_keys_enabled = false
+vertical_alignment = 1
+text_direction = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ControlPane/InstalledVersions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.079
+anchor_right = 0.99
+anchor_bottom = 0.082
+offset_top = 0.236004
+offset_right = -0.125092
+offset_bottom = -0.311996
+
+[node name="ReleaseLists" type="Panel" parent="ControlPane"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.57
+script = ExtResource("2_62e2m")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ControlPane/ReleaseLists"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0153846
+anchor_top = 0.0833333
+anchor_right = 0.987692
+anchor_bottom = 0.99031
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlPane/ReleaseLists/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonTemplate" type="PanelContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+action_mode = 0
+alignment = 0
+text_overrun_behavior = 3
+autowrap_mode = 3
+clip_text = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="MarginContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.88
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Text" type="RichTextLabel" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/Name"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[b]VERSION HERE LMFAO[/b]"
+fit_content = true
+
+[node name="NOTINSTALLED" type="TextureRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+texture = ExtResource("6_6a6wx")
+expand_mode = 3
+
+[node name="Installed" type="TextureRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+texture = ExtResource("6_fj5cn")
+expand_mode = 3
+
+[node name="Installing" type="AspectRatioContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
+layout_mode = 2
+stretch_mode = 1
+alignment_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/Installing"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ColorRect" type="ColorRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/Installing/MarginContainer"]
+material = SubResource("ShaderMaterial_eh0v1")
+layout_mode = 2
+
+[node name="LoadingThrobber" type="AspectRatioContainer" parent="ControlPane/ReleaseLists"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.377
+anchor_top = 0.423
+anchor_right = 0.623
+anchor_bottom = 0.577
+offset_left = 0.125008
+offset_top = -0.143997
+offset_right = -0.125015
+offset_bottom = 0.144012
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="ControlPane/ReleaseLists/LoadingThrobber"]
+material = SubResource("ShaderMaterial_eh0v1")
+layout_mode = 2
+
+[node name="Warning" type="AspectRatioContainer" parent="ControlPane/ReleaseLists"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.377
+anchor_top = 0.423
+anchor_right = 0.623
+anchor_bottom = 0.577
+offset_left = 0.125008
+offset_top = -0.143997
+offset_right = -0.125015
+offset_bottom = 0.144012
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 1
+
+[node name="warning" type="TextureRect" parent="ControlPane/ReleaseLists/Warning"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("12_eh0v1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlPane/ReleaseLists"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.011
+anchor_right = 0.985
+anchor_bottom = 0.0796202
+offset_left = 0.124999
+offset_top = -0.676
+offset_right = 0.874908
+offset_bottom = -0.0839958
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 21
+theme_override_font_sizes/bold_font_size = 69
+bbcode_enabled = true
+text = "GitHub Releases"
+fit_content = true
+scroll_active = false
+tab_size = 13
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ControlPane/ReleaseLists"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.079
+anchor_right = 0.96
+anchor_bottom = 0.082
+offset_top = 0.236004
+offset_right = -0.125092
+offset_bottom = -0.311996
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.858507
+anchor_top = 0.126543
+anchor_right = 0.991319
+anchor_bottom = 0.270062
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonTemplate" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/ButtonTemplate"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+action_mode = 0
+alignment = 0
+text_overrun_behavior = 3
+autowrap_mode = 3
+clip_text = true
+script = ExtResource("7_iy58a")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonTemplate"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="MarginContainer" parent="VBoxContainer/ButtonTemplate/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.88
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer/ButtonTemplate/HBoxContainer/Name"]
+layout_mode = 2
+mouse_filter = 2
+text = "Set Installation Location"
+fit_content = true
+horizontal_alignment = 2
+vertical_alignment = 3
+
+[node name="ButtonTemplate2" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/ButtonTemplate2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+action_mode = 0
+alignment = 0
+text_overrun_behavior = 3
+autowrap_mode = 3
+clip_text = true
+script = ExtResource("10_pxugv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonTemplate2"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="MarginContainer" parent="VBoxContainer/ButtonTemplate2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.88
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer/ButtonTemplate2/HBoxContainer/Name"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Refresh All"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -20.0
+offset_right = 172.0
+offset_bottom = -6.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Godot Version Manager v0.1"
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.772292
+anchor_top = 0.0864198
+anchor_right = 0.990451
+anchor_bottom = 0.12142
+offset_left = 0.319946
+offset_bottom = 0.32
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "absolutely nothing"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("8_6a6wx")
+metadata/_edit_use_anchors_ = true
+
+[node name="Notification" type="PanelContainer" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+z_index = 460
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.538785
+anchor_top = 0.0154321
+anchor_right = 0.993924
+anchor_bottom = 0.112926
+offset_left = 0.319946
+offset_bottom = -0.176003
+grow_horizontal = 0
+script = ExtResource("12_am1vj")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Notification"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Notification"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Notification/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="warning" type="TextureRect" parent="Notification/HBoxContainer/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("12_eh0v1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="checkmark" type="TextureRect" parent="Notification/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_fj5cn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="cross" type="TextureRect" parent="Notification/HBoxContainer/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_6a6wx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Notification/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Something went wrong lol"
+vertical_alignment = 1
