@@ -25,7 +25,8 @@ All code falls under the [MIT License](https://opensource.org/license/mit), whil
 
 1. `yourenotsafe.png` – Author unknown  
 2. `notif_warning.ogg` – Taken from the [KDE Plasma](https://kde.org/plasma-desktop/) Oxygen theme  
-3. `notif_chime.ogg` – Also from the [KDE Plasma](https://kde.org/plasma-desktop/) Oxygen theme  
+3. `notif_chime.ogg` – Also from the [KDE Plasma](https://kde.org/plasma-desktop/) Oxygen theme
+4. `cross.svg`, `warning.svg`, and `checkmark.svg`icons are assets made by Preinstallable, under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ---
 
