@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Saihex Studios
+// Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +10,7 @@ using Godot;
 
 public partial class GodotLauncher : Node
 {
+    // Reads the installation directory and find Godot installations.
     public GodotInstallationData[] getInstallationList()
     {
         var installationPath = InstallationLocationSingleton.Instance.InstallationLocation;
@@ -65,6 +69,7 @@ public partial class GodotLauncher : Node
         return [.. godotInstallationDatas];
     }
 
+    // Launch a binary as separate process.
     public void launchProcess(string pathToExecutable, string arguments = "")
     {
         try
@@ -72,7 +77,7 @@ public partial class GodotLauncher : Node
             string fullPath = ProjectSettings.GlobalizePath(pathToExecutable);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                fullPath = fullPath.Replace("/", "\\"); // I hate you windows.
+                fullPath = fullPath.Replace("/", "\\");
 
             if (!File.Exists(fullPath))
                 throw new Exception("Installation doesn't exists!");
@@ -87,7 +92,7 @@ public partial class GodotLauncher : Node
                 }
             );
 
-            fullPath = fullPath.Replace("\\", "/"); // fml
+            fullPath = fullPath.Replace("\\", "/");
             var filename = fullPath.Split("/")[fullPath.Split("/").Length - 2];
             var isMono = filename.EndsWith("_mono") ? " (Mono)" : "";
 

@@ -24,8 +24,10 @@ All code falls under the [MIT License](https://opensource.org/license/mit), whil
 ### 🧩 Third-party Assets Used
 
 1. `yourenotsafe.png` – Author unknown  
-2. `notif_warning.ogg` – Taken from the [KDE Plasma](https://kde.org/plasma-desktop/) Oxygen theme  
-3. `notif_chime.ogg` – Also from the [KDE Plasma](https://kde.org/plasma-desktop/) Oxygen theme  
+2. `notif_warning.ogg`, and `notif_chime.ogg` – Taken from the [KDE Plasma](https://kde.org/plasma-desktop/) Oxygen theme, under [LGPL-2.0-or-later](https://opensource.org/license/lgpl-2-0)
+3. `download.svg`, `warning.svg`, `cross.svg`, and `checkmark.svg` icons are assets made by Preinstallable, under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+4. `github-mark-white.svg` - from [GitHub](https://github.com/logos)
+5. Godot logo (Used in GVM logo) - from [Godot Foundation](https://godotengine.org/press/)
 
 ---
 

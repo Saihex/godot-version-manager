@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Saihex Studios
+// Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -30,6 +33,9 @@ public partial class GodotVersionFetcher : Node
                 completion.SetException(new System.Exception("Request failed."));
         };
 
+        http.Timeout = 30;
+        http.UseThreads = true;
+
         http.Request("https://api.github.com/repos/godotengine/godot/releases", headers);
 
         try
@@ -42,14 +48,18 @@ public partial class GodotVersionFetcher : Node
 
             foreach (var release in parsed.RootElement.EnumerateArray())
             {
+                var Draft = release.GetProperty("draft").GetBoolean();
+                var Prerelease = release.GetProperty("prerelease").GetBoolean();
+
+                if (Draft || Prerelease)
+                    continue;
+
                 var assets = release.GetProperty("assets").EnumerateArray();
 
                 var version = new GodotVersionData
                 {
                     Name = release.GetProperty("tag_name").GetString(),
                     PublishedAt = release.GetProperty("published_at").GetString(),
-                    Draft = release.GetProperty("draft").GetBoolean(),
-                    Prerelease = release.GetProperty("prerelease").GetBoolean(),
                     monoAsset = FilterAssetsArray(assets, true),
                     normalAsset = FilterAssetsArray(assets, false),
                 };
@@ -67,13 +77,13 @@ public partial class GodotVersionFetcher : Node
 
             EmitSignal(nameof(VersionsFetched), final_list);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
-            // notification already managed on high level UI!
             EmitSignal(nameof(FetchFailed), ex.Message);
         }
     }
 
+    // Filter the release assets array according to the runtime system architecture and platform
     public static string FilterAssetsArray(JsonElement.ArrayEnumerator array, bool getMono)
     {
         bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);

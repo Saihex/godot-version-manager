@@ -12,9 +12,11 @@ config_version=5
 
 config/name="Godot Version Manager"
 config/description="Godot Version Manager (GVM) is a simple lightweight application made by Saihex Studios for managing multiple Godot versions in a single app. It also provides ability to download Godot releases from the official Godot GitHub repository."
-config/version="0.1"
+config/version="0.2"
 run/main_scene="uid://c3xsqoo45d87b"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+boot_splash/fullsize=false
+boot_splash/image="uid://cioidlxe2ceha"
 config/icon="uid://1a2f2fyylqeo"
 
 [autoload]

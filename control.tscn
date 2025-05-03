@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3xsqoo45d87b"]
+[gd_scene load_steps=21 format=3 uid="uid://c3xsqoo45d87b"]
 
 [ext_resource type="Texture2D" uid="uid://dnyt8hbllenut" path="res://Images/saihex.svg" id="1_ee4bf"]
 [ext_resource type="Texture2D" uid="uid://b5njvofj20wse" path="res://Images/yourenotsafe.png" id="1_g31lc"]
@@ -8,13 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://1a2f2fyylqeo" path="res://Images/GVM.svg" id="3_pxugv"]
 [ext_resource type="Script" uid="uid://bdlpuiwnruiol" path="res://GDScripts/LauncherList.gd" id="4_0ytqx"]
 [ext_resource type="Shader" uid="uid://bf3u220l06y4d" path="res://Shaders/UIs/loadingspinner.gdshader" id="5_pxugv"]
-[ext_resource type="Texture2D" uid="uid://fqy0o3wxpv7x" path="res://Images/cross.svg" id="6_6a6wx"]
+[ext_resource type="Texture2D" uid="uid://bktu5f4b1m5xu" path="res://Images/github-mark-white.svg" id="5_xvdhi"]
 [ext_resource type="Texture2D" uid="uid://1diy75u7ysjs" path="res://Images/checkmark.svg" id="6_fj5cn"]
 [ext_resource type="Script" uid="uid://drtryhst0o2y7" path="res://CSharpScripts/InstallationLocation.cs" id="7_iy58a"]
 [ext_resource type="Script" uid="uid://d4fqxu8xsqtgg" path="res://GDScripts/PathUpdater.gd" id="8_6a6wx"]
+[ext_resource type="Script" uid="uid://m3k8a7pkm34g" path="res://CSharpScripts/VersionUninstaller.cs" id="9_pi4e7"]
+[ext_resource type="Texture2D" uid="uid://dynptqnuoo5m" path="res://Images/download.svg" id="9_xvdhi"]
 [ext_resource type="Script" uid="uid://7qf1iof7b8k1" path="res://GDScripts/force_refresh.gd" id="10_pxugv"]
 [ext_resource type="Script" uid="uid://byda1hvlnlcip" path="res://GDScripts/NotificationUI.gd" id="12_am1vj"]
 [ext_resource type="Texture2D" uid="uid://0gwxkd3xbrsy" path="res://Images/warning.svg" id="12_eh0v1"]
+[ext_resource type="Script" uid="uid://rysv8gmtpxuj" path="res://OpenIL.gd" id="14_oq4si"]
+[ext_resource type="Texture2D" uid="uid://fqy0o3wxpv7x" path="res://Images/cross.svg" id="18_m4egf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eh0v1"]
 shader = ExtResource("5_pxugv")
@@ -28,7 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="."]
 custom_minimum_size = Vector2(1, 1)
 layout_direction = 2
 layout_mode = 1
@@ -47,50 +51,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -198.0
-offset_top = -240.0
+offset_left = -193.0
+offset_top = -231.0
+offset_right = 10.0
+offset_bottom = 15.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("1_g31lc")
 expand_mode = 1
 stretch_mode = 6
 script = ExtResource("2_knq72")
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.949299
-anchor_top = 0.908963
-anchor_right = 0.994
-anchor_bottom = 0.988
-offset_left = 0.407959
-offset_top = -0.00799561
-offset_right = -0.0880127
-offset_bottom = -0.223999
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource("1_kbped")
-metadata/_edit_use_anchors_ = true
-
-[node name="MarginContainer" type="MarginContainer" parent="Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="TextureRect" type="TextureRect" parent="Button/MarginContainer"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-texture = ExtResource("1_ee4bf")
-expand_mode = 4
-stretch_mode = 5
-metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="VFlowContainer" parent="."]
 layout_mode = 1
@@ -105,14 +75,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Title"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="Title/HBoxContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
+size_flags_horizontal = 2
 texture = ExtResource("3_pxugv")
-expand_mode = 4
+expand_mode = 1
 stretch_mode = 4
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Title/HBoxContainer"]
@@ -134,6 +104,80 @@ text_direction = 1
 [node name="ColorRect" type="ColorRect" parent="Title"]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+metadata/_edit_use_anchors_ = true
+
+[node name="LinkButtons" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -44.0
+offset_right = -7.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LinkButtons"]
+layout_mode = 2
+
+[node name="GitHub" type="Button" parent="LinkButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_kbped")
+metadata/_edit_use_anchors_ = true
+metadata/url = &"https://github.com/Saihex/godot-version-manager"
+
+[node name="MarginContainer" type="MarginContainer" parent="LinkButtons/HBoxContainer/GitHub"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="LinkButtons/HBoxContainer/GitHub/MarginContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("5_xvdhi")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Saihex" type="Button" parent="LinkButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_kbped")
+metadata/_edit_use_anchors_ = true
+metadata/url = &"https://www.saihex.com"
+
+[node name="MarginContainer" type="MarginContainer" parent="LinkButtons/HBoxContainer/Saihex"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="LinkButtons/HBoxContainer/Saihex/MarginContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("1_ee4bf")
+expand_mode = 2
+stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="ControlPane" type="HBoxContainer" parent="."]
@@ -149,10 +193,32 @@ offset_right = -0.35199
 offset_bottom = -0.135986
 
 [node name="InstalledVersions" type="Panel" parent="ControlPane"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("4_0ytqx")
 metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ControlPane/InstalledVersions"]
+modulate = Color(1, 1, 1, 0.278431)
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -245.0
+offset_top = -170.0
+offset_right = 11.0
+offset_bottom = 86.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 0.270526
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("6_fj5cn")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="List" type="ScrollContainer" parent="ControlPane/InstalledVersions"]
 layout_mode = 1
@@ -173,11 +239,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ButtonTemplate" type="PanelContainer" parent="ControlPane/InstalledVersions/List/uwu"]
 visible = false
+clip_contents = true
 layout_mode = 2
 
 [node name="Button" type="Button" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 18
 action_mode = 0
 alignment = 0
@@ -185,20 +253,51 @@ text_overrun_behavior = 3
 autowrap_mode = 3
 clip_text = true
 
-[node name="MarginContainer" type="MarginContainer" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate"]
+[node name="Panel" type="HBoxContainer" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="MarginContainer" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="text" type="RichTextLabel" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/MarginContainer"]
+[node name="Text" type="Label" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/Panel/Name"]
+custom_minimum_size = Vector2(1, 22.97)
+layout_mode = 2
+text = "Version here uwu"
+autowrap_mode = 3
+
+[node name="Uninstall" type="PanelContainer" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+
+[node name="Button" type="Button" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/Panel/Uninstall"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+script = ExtResource("9_pi4e7")
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/Panel/Uninstall"]
 layout_mode = 2
 mouse_filter = 2
-bbcode_enabled = true
-text = "[b]VERSION HERE LMFAO[/b]"
-fit_content = true
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="ControlPane/InstalledVersions/List/uwu/ButtonTemplate/Panel/Uninstall/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("18_m4egf")
+expand_mode = 3
+stretch_mode = 4
 
 [node name="LoadingThrobber" type="AspectRatioContainer" parent="ControlPane/InstalledVersions"]
 layout_mode = 1
@@ -219,7 +318,7 @@ stretch_mode = 1
 material = SubResource("ShaderMaterial_eh0v1")
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ControlPane/InstalledVersions"]
+[node name="Title" type="RichTextLabel" parent="ControlPane/InstalledVersions"]
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
@@ -245,7 +344,7 @@ vertical_alignment = 1
 text_direction = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="ControlPane/InstalledVersions"]
+[node name="Background" type="ColorRect" parent="ControlPane/InstalledVersions"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
@@ -257,11 +356,33 @@ offset_right = -0.125092
 offset_bottom = -0.311996
 
 [node name="ReleaseLists" type="Panel" parent="ControlPane"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.57
 script = ExtResource("2_62e2m")
 metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ControlPane/ReleaseLists"]
+modulate = Color(1, 1, 1, 0.278431)
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -245.0
+offset_top = -170.0
+offset_right = 11.0
+offset_bottom = 86.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 0.270526
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("9_xvdhi")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ControlPane/ReleaseLists"]
 layout_mode = 1
@@ -287,7 +408,9 @@ layout_mode = 2
 [node name="Button" type="Button" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 18
+disabled = true
 action_mode = 0
 alignment = 0
 text_overrun_behavior = 3
@@ -315,31 +438,16 @@ bbcode_enabled = true
 text = "[b]VERSION HERE LMFAO[/b]"
 fit_content = true
 
-[node name="NOTINSTALLED" type="TextureRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.0
-mouse_filter = 2
-texture = ExtResource("6_6a6wx")
-expand_mode = 3
-
-[node name="Installed" type="TextureRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.0
-mouse_filter = 2
-texture = ExtResource("6_fj5cn")
-expand_mode = 3
-
 [node name="Installing" type="AspectRatioContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
+visible = false
 layout_mode = 2
+mouse_filter = 2
 stretch_mode = 1
 alignment_horizontal = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/Installing"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
@@ -348,6 +456,52 @@ theme_override_constants/margin_bottom = 2
 [node name="ColorRect" type="ColorRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/Installing/MarginContainer"]
 material = SubResource("ShaderMaterial_eh0v1")
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Installed" type="AspectRatioContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+stretch_mode = 1
+alignment_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/Installed"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Image" type="TextureRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/Installed/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+texture = ExtResource("6_fj5cn")
+expand_mode = 3
+
+[node name="NOTINSTALLED" type="AspectRatioContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+stretch_mode = 1
+alignment_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/NOTINSTALLED"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="egamI" type="TextureRect" parent="ControlPane/ReleaseLists/ScrollContainer/VBoxContainer/ButtonTemplate/HBoxContainer/NOTINSTALLED/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+texture = ExtResource("9_xvdhi")
+expand_mode = 3
 
 [node name="LoadingThrobber" type="AspectRatioContainer" parent="ControlPane/ReleaseLists"]
 layout_mode = 1
@@ -392,7 +546,7 @@ texture = ExtResource("12_eh0v1")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ControlPane/ReleaseLists"]
+[node name="Title" type="RichTextLabel" parent="ControlPane/ReleaseLists"]
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
@@ -419,7 +573,7 @@ vertical_alignment = 1
 text_direction = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="ControlPane/ReleaseLists"]
+[node name="Separator" type="ColorRect" parent="ControlPane/ReleaseLists"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04
@@ -430,23 +584,27 @@ offset_top = 0.236004
 offset_right = -0.125092
 offset_bottom = -0.311996
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ButtonControls" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.858507
-anchor_top = 0.126543
+anchor_left = 0.859
+anchor_top = 0.125
 anchor_right = 0.991319
-anchor_bottom = 0.270062
+anchor_bottom = 0.886
+offset_left = -0.567993
+offset_bottom = -0.128052
 grow_horizontal = 0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="ButtonTemplate" type="PanelContainer" parent="VBoxContainer"]
+[node name="InstallationLocation" type="PanelContainer" parent="ButtonControls"]
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="Button" type="Button" parent="VBoxContainer/ButtonTemplate"]
+[node name="Button" type="Button" parent="ButtonControls/InstallationLocation"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 18
 action_mode = 0
 alignment = 0
@@ -455,34 +613,70 @@ autowrap_mode = 3
 clip_text = true
 script = ExtResource("7_iy58a")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonTemplate"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Name" type="MarginContainer" parent="VBoxContainer/ButtonTemplate/HBoxContainer"]
+[node name="Name" type="MarginContainer" parent="ButtonControls/InstallationLocation"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 6.88
 mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="Text" type="RichTextLabel" parent="VBoxContainer/ButtonTemplate/HBoxContainer/Name"]
+[node name="Text" type="RichTextLabel" parent="ButtonControls/InstallationLocation/Name"]
 layout_mode = 2
 mouse_filter = 2
 text = "Set Installation Location"
 fit_content = true
+autowrap_mode = 2
+shortcut_keys_enabled = false
 horizontal_alignment = 2
 vertical_alignment = 3
+text_direction = 1
 
-[node name="ButtonTemplate2" type="PanelContainer" parent="VBoxContainer"]
+[node name="OpenInstallationLocation" type="PanelContainer" parent="ButtonControls"]
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="Button" type="Button" parent="VBoxContainer/ButtonTemplate2"]
+[node name="Button" type="Button" parent="ButtonControls/OpenInstallationLocation"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+action_mode = 0
+alignment = 0
+text_overrun_behavior = 3
+autowrap_mode = 3
+clip_text = true
+script = ExtResource("14_oq4si")
+
+[node name="Name" type="MarginContainer" parent="ButtonControls/OpenInstallationLocation"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Text" type="RichTextLabel" parent="ButtonControls/OpenInstallationLocation/Name"]
+layout_mode = 2
+mouse_filter = 2
+text = "Open Installation Location"
+fit_content = true
+autowrap_mode = 2
+shortcut_keys_enabled = false
+horizontal_alignment = 2
+vertical_alignment = 3
+text_direction = 1
+
+[node name="RefreshAll" type="PanelContainer" parent="ButtonControls"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Button" type="Button" parent="ButtonControls/RefreshAll"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 18
 action_mode = 0
 alignment = 0
@@ -491,56 +685,99 @@ autowrap_mode = 3
 clip_text = true
 script = ExtResource("10_pxugv")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonTemplate2"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Name" type="MarginContainer" parent="VBoxContainer/ButtonTemplate2/HBoxContainer"]
+[node name="Name" type="MarginContainer" parent="ButtonControls/RefreshAll"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 6.88
 mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="Text" type="RichTextLabel" parent="VBoxContainer/ButtonTemplate2/HBoxContainer/Name"]
+[node name="Text" type="RichTextLabel" parent="ButtonControls/RefreshAll/Name"]
 layout_mode = 2
 mouse_filter = 2
-bbcode_enabled = true
 text = "Refresh All"
 fit_content = true
+autowrap_mode = 2
+shortcut_keys_enabled = false
 horizontal_alignment = 2
+vertical_alignment = 3
+text_direction = 1
 
-[node name="Label2" type="Label" parent="."]
+[node name="RefreshWoFetch" type="PanelContainer" parent="ButtonControls"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Button" type="Button" parent="ButtonControls/RefreshWoFetch"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+action_mode = 0
+alignment = 0
+text_overrun_behavior = 3
+autowrap_mode = 3
+clip_text = true
+script = ExtResource("10_pxugv")
+metadata/without_fetch = true
+
+[node name="Name" type="MarginContainer" parent="ButtonControls/RefreshWoFetch"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Text" type="RichTextLabel" parent="ButtonControls/RefreshWoFetch/Name"]
+layout_mode = 2
+mouse_filter = 2
+text = "Refresh Installations"
+fit_content = true
+autowrap_mode = 2
+shortcut_keys_enabled = false
+horizontal_alignment = 2
+vertical_alignment = 3
+text_direction = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = -20.0
-offset_right = 172.0
+offset_right = 296.0
 offset_bottom = -6.0
 grow_vertical = 0
-theme_override_font_sizes/font_size = 10
-text = "Godot Version Manager v0.1"
-vertical_alignment = 2
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+bbcode_enabled = true
+text = "Godot Version Manager v0.2 [i]by [color=#00ffffff]Saihex[/color] [color=#ff95ffff]Studios[/color][/i]"
+fit_content = true
+text_direction = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="InstallationLocation" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.772292
-anchor_top = 0.0864198
+anchor_left = 0.990451
+anchor_top = 0.12142
 anchor_right = 0.990451
 anchor_bottom = 0.12142
-offset_left = 0.319946
+offset_left = -250.999
+offset_top = -22.6801
 offset_bottom = 0.32
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 16
 text = "absolutely nothing"
 horizontal_alignment = 2
 vertical_alignment = 2
+text_direction = 1
 script = ExtResource("8_6a6wx")
 metadata/_edit_use_anchors_ = true
 
@@ -563,6 +800,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="Notification"]
 layout_mode = 2
+focus_mode = 0
+text_direction = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Notification"]
 layout_mode = 2
@@ -571,10 +810,10 @@ mouse_filter = 2
 [node name="MarginContainer" type="MarginContainer" parent="Notification/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="warning" type="TextureRect" parent="Notification/HBoxContainer/MarginContainer"]
 visible = false
@@ -585,20 +824,20 @@ texture = ExtResource("12_eh0v1")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="checkmark" type="TextureRect" parent="Notification/HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("6_fj5cn")
-expand_mode = 2
-stretch_mode = 5
-
 [node name="cross" type="TextureRect" parent="Notification/HBoxContainer/MarginContainer"]
 visible = false
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("6_6a6wx")
+texture = ExtResource("18_m4egf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="checkmark" type="TextureRect" parent="Notification/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_fj5cn")
 expand_mode = 2
 stretch_mode = 5
 

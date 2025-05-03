@@ -1,8 +1,12 @@
+# Copyright (c) 2025 Saihex Studios
+# Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 extends Panel
 
 var fetcher
 var ListContainer
 var InstallatingList = {}
+var versionCache: Array
 
 func _on_version_downloaded(installerNode: Node, button: PanelContainer, checker: String):	
 	installerNode.queue_free()
@@ -71,13 +75,11 @@ func _on_version_pressed(button: PanelContainer, version_data: Object, mono: boo
 	InstallationHandler.beginDownload(version_data, mono)
 
 func _on_versions_fetched(versions: Array):	
+	versionCache = versions
 	# signal to update the list
 	var button_template = ListContainer.get_node("ButtonTemplate")
 	
 	for version_data in versions:
-		if version_data.Draft or version_data.Prerelease:
-			continue
-			
 		# normal version
 		if version_data.normalAsset != "":	
 			var button = button_template.duplicate()
@@ -89,6 +91,9 @@ func _on_versions_fetched(versions: Array):
 			button.get_node("HBoxContainer/Name/Text").text = version_data.Name
 			if (!checkIfVersionInstalled(version_data.Name, false)): 
 				button.get_node("Button").connect("pressed", Callable(self, "_on_version_pressed").bind(button, version_data, false))
+				button.get_node("Button").disabled = false
+			else:	
+				button.get_node("Button").disabled = true
 			
 			button.get_node("Button").tooltip_text = filename + "\n" + version_data.PublishedAt
 			button.name = version_data.Name
@@ -110,6 +115,9 @@ func _on_versions_fetched(versions: Array):
 			
 			if (!checkIfVersionInstalled(version_data.Name, true)): 
 				button.get_node("Button").connect("pressed", Callable(self, "_on_version_pressed").bind(button, version_data, true))
+				button.get_node("Button").disabled = false
+			else:	
+				button.get_node("Button").disabled = true
 			
 			button.get_node("Button").tooltip_text = filename + "\n" + version_data.PublishedAt
 			button.name = version_data.Name + " (mono)"
@@ -134,7 +142,18 @@ func force_refresh_list():
 	
 	fetcher.Fetch()
 
+func force_refresh_without_fetch():	
+	var early_installations = get_node("ScrollContainer/VBoxContainer").get_children()
+	for installation in early_installations:	
+		if installation.name == "ButtonTemplate":	
+			continue
+		installation.set_visible(false)
+		installation.queue_free()
+	
+	_on_versions_fetched(versionCache)
+
 func _on_failed_fetch(msg: String):	
+	versionCache.clear()
 	get_node("LoadingThrobber").set_visible(false)
 	get_node("Warning").set_visible(true)
 	get_tree().call_group("notify", "warning_notify", "Failed to fetch releases!\n" + msg)

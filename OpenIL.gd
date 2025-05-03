@@ -1,11 +1,12 @@
 # Copyright (c) 2025 Saihex Studios
 # Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
-extends Label
+extends Button
 
-func _process(_delta):	
+func _pressed():	
 	var path = InstallationLocationSingleton.InstallationLocation
-	if path == "":	
-		self.text = "INSTALLATION LOCATION NOT SET"
+	
+	if path != "" and DirAccess.dir_exists_absolute(path):	
+		OS.shell_open(path)
 	else:	
-		self.text = path
+		get_tree().call_group("notify", "warning_notify", "Please set a installation location.")
