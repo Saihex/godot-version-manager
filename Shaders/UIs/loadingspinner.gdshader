@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Saihex Studios
+// Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 shader_type canvas_item;
 
 uniform vec2 radial_center = vec2(0.5, 0.5);

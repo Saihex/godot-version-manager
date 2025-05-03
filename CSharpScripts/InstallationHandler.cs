@@ -1,5 +1,7 @@
+// Copyright (c) 2025 Saihex Studios
+// Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Godot;
@@ -101,7 +103,7 @@ public partial class InstallationHandler : Node
                 installationPath + "/" + versionData.Name + (downloadMono ? "_mono" : "")
             );
 
-            ZipExtractor.ExtractZipContents(
+            await ZipExtractor.ExtractZipContents(
                 zipLocation,
                 installationPath + "/" + versionData.Name + (downloadMono ? "_mono" : "")
             );

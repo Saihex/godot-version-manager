@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Saihex Studios
+// Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 using System;
 using System.IO;
 using Godot;
@@ -103,6 +106,7 @@ public partial class InstallationLocation : Button
         UseRelative = relative;
         InstallationLocationSingleton.Instance.InstallationLocation = _selectedPath;
         SavePathToFile(_selectedPath);
+        GetTree().CallGroup("reactive_elements", "force_refresh_without_fetch");
         EmitSignal(SignalName.DirectorySelected, _selectedPath);
     }
 

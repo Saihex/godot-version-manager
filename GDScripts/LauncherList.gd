@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Saihex Studios
+# Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 extends Panel
 
 var launcher
@@ -23,11 +26,12 @@ func updateList():
 	
 	for data in installations:	
 		var button = button_template.duplicate()
-		button.get_node("MarginContainer/text").text = data.Name
+		button.get_node("Panel/Name/Text").text = data.Name
 		button.get_node("Button").tooltip_text = data.Executable
 		button.set_visible(true)
 		get_node("List/uwu").add_child(button)
 		button.get_node("Button").connect("pressed", Callable(self, "_launch_installation").bind(data.Executable))
+		button.get_node("Panel/Uninstall/Button").set_meta("VersionPath", data.Executable.split("/")[data.Executable.split("/").size() - 2])
 
 func refresh_list():	
 	updateList()
@@ -36,6 +40,9 @@ func force_refresh_list():
 	get_node("LoadingThrobber").set_visible(true)
 	updateList()
 	get_node("LoadingThrobber").set_visible(false)
+
+func force_refresh_without_fetch():	
+	force_refresh_list()
 
 func _ready():	
 	await get_tree().create_timer(1.0).timeout

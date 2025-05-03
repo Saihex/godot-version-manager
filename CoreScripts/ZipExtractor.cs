@@ -1,12 +1,16 @@
+// Copyright (c) 2025 Saihex Studios
+// Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 using System;
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Godot;
 
 public static class ZipExtractor
 {
-    // Default permissions: owner read/write, others read-only
+    // Default permissions: owner read/write & execute, others read-only & execute
     private const UnixFileMode DefaultFileMode =
         UnixFileMode.UserRead
         | UnixFileMode.UserWrite
@@ -19,46 +23,49 @@ public static class ZipExtractor
         | UnixFileMode.GroupExecute
         | UnixFileMode.OtherExecute;
 
-    public static void ExtractZipContents(string zipPath, string extractTo)
+    public static async Task ExtractZipContents(string zipPath, string extractTo)
     {
-        using ZipArchive archive = ZipFile.OpenRead(zipPath);
-        string commonRoot = GetRootDirectory(archive);
-
-        foreach (ZipArchiveEntry entry in archive.Entries)
+        await Task.Run(() =>
         {
-            // Strip the root directory if present
-            string relativePath = entry.FullName;
+            using ZipArchive archive = ZipFile.OpenRead(zipPath);
+            string commonRoot = GetRootDirectory(archive);
 
-            if (!string.IsNullOrEmpty(commonRoot) && relativePath.StartsWith(commonRoot))
-                relativePath = relativePath.Substring(commonRoot.Length);
-
-            if (string.IsNullOrEmpty(relativePath))
-                continue; // Skip root folder
-
-            string fullPath = Path.Combine(extractTo, relativePath);
-
-            if (entry.FullName.EndsWith("/"))
+            foreach (ZipArchiveEntry entry in archive.Entries)
             {
-                Directory.CreateDirectory(fullPath);
-                SetPermissions(fullPath, isDirectory: true);
-            }
-            else
-            {
-                string directory = Path.GetDirectoryName(fullPath);
-                if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                    SetPermissions(directory, isDirectory: true);
-                }
+                // Strip the root directory if present
+                string relativePath = entry.FullName;
 
-                using (var entryStream = entry.Open())
-                using (var fileStream = File.Create(fullPath))
+                if (!string.IsNullOrEmpty(commonRoot) && relativePath.StartsWith(commonRoot))
+                    relativePath = relativePath.Substring(commonRoot.Length);
+
+                if (string.IsNullOrEmpty(relativePath))
+                    continue; // Skip root folder
+
+                string fullPath = Path.Combine(extractTo, relativePath);
+
+                if (entry.FullName.EndsWith("/"))
                 {
-                    entryStream.CopyTo(fileStream);
+                    Directory.CreateDirectory(fullPath);
+                    SetPermissions(fullPath, isDirectory: true);
                 }
-                SetPermissions(fullPath, isDirectory: false);
+                else
+                {
+                    string directory = Path.GetDirectoryName(fullPath);
+                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                        SetPermissions(directory, isDirectory: true);
+                    }
+
+                    using (var entryStream = entry.Open())
+                    using (var fileStream = File.Create(fullPath))
+                    {
+                        entryStream.CopyTo(fileStream);
+                    }
+                    SetPermissions(fullPath, isDirectory: false);
+                }
             }
-        }
+        });
     }
 
     private static void SetPermissions(string path, bool isDirectory)
