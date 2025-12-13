@@ -1,3 +1,4 @@
+# Notice: Saihex's public repositories are moving to Codeberg [https://codeberg.org/saihex/godot-version-manager](https://codeberg.org/saihex/godot-version-manager)
 # Godot Version Manager (GVM) by Saihex Studios
 
 <p align="center">
